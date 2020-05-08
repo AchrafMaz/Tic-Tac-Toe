@@ -6,6 +6,8 @@ WHITE = (255,255,255)
 win = pygame.display.set_mode((WIDTH,HEIGHT))
 win.fill((0,0,200))
 table = np.zeros((3,3))
+run = True
+
 def draw(x,y):
     pygame.draw.line(win,WHITE,x,y,7)
 def draw_x(x,y):
@@ -16,12 +18,6 @@ def draw_o(x,y):
     pygame.draw.circle(win,(200,0,0),(x,y),90,3)
 
 def move_o():
-    if table[0,:] == 1 or table[1,:]==1 or table[2,:]==1 or table[:,0]==1 or table[:,1]==1 or table[:,2]==1 :
-        run = False
-    if table[0,:]==2 or table[1,:]==2 or table[2,:]==2 or table[:,0]==2 or table[:,1]==2 or table[:,2]==2 :
-        run = False
-
-
 
     t  =pygame.mouse.get_pos()
     if t[0] < 200:
@@ -95,9 +91,10 @@ draw((400,0),(400,600))
 draw((0,200),(600,200))
 draw((0,400),(600,400))
 pygame.display.flip()
+player = 1
+player1 = 2
+board = table
 
-
-run = True
 r = 0
 while run:
     for event in pygame.event.get():
@@ -113,4 +110,19 @@ while run:
 
         pygame.display.flip()
 
-
+    if any([(board[0, :] == player).all(),
+            (board[:, 0] == player).all(),
+            (board[1, :] == player).all(),
+            (board[:, 1] == player).all(),
+            (board[2, :] == player).all(),
+            (board[:, 2] == player).all()]):
+        run = False
+        print(" O win")
+    if any([(board[0, :] == player1).all(),
+            (board[:, 0] == player1).all(),
+            (board[1, :] == player1).all(),
+            (board[:, 1] == player1).all(),
+            (board[2, :] == player1).all(),
+            (board[:, 2] == player1).all()]):
+        run = False
+        print("X win")
