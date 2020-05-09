@@ -115,7 +115,7 @@ while run:
             (board[1, :] == player).all(),
             (board[:, 1] == player).all(),
             (board[2, :] == player).all(),
-            (board[:, 2] == player).all()]):
+            (board[:, 2] == player).all()]) or board[0,0] == player and board[1,1] == player and board[2,2] == player or board[0,2] == player and board[1,1] == player and board[2,0] == player:
         run = False
         print(" O win")
     if any([(board[0, :] == player1).all(),
@@ -123,6 +123,7 @@ while run:
             (board[1, :] == player1).all(),
             (board[:, 1] == player1).all(),
             (board[2, :] == player1).all(),
-            (board[:, 2] == player1).all()]):
+            (board[:, 2] == player1).all()]) or board[0,0] == player1 and board[1,1] == player1 and board[2,2] == player1 or board[0,2] == player1 and board[1,1] == player1 and board[2,0] == player1:
         run = False
         print("X win")
+
